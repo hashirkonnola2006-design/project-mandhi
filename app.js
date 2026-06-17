@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (playGamesTrigger) {
     playGamesTrigger.addEventListener('click', () => switchTab('games-tab'));
   }
+  const viewWaitlistTrigger = document.querySelector('.view-waitlist-trigger');
+  if (viewWaitlistTrigger) {
+    viewWaitlistTrigger.addEventListener('click', () => switchTab('waiting-list-tab'));
+  }
   const navigateHome = document.querySelector('.navigate-home');
   if (navigateHome) {
     navigateHome.addEventListener('click', () => switchTab('home-tab'));
