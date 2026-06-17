@@ -32,8 +32,7 @@
       "dest": "admin.html"
     },
     {
-      "src": "/(index.css|app.js|assets/.*)",
-      "dest": "$1"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
