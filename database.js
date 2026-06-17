@@ -8,7 +8,9 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'mandhi-db.json');
+const DB_PATH = process.env.VERCEL
+  ? path.join('/tmp', 'mandhi-db.json')
+  : path.join(__dirname, 'mandhi-db.json');
 const adapter = new FileSync(DB_PATH);
 const db = low(adapter);
 

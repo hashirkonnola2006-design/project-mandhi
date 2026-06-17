@@ -350,12 +350,16 @@ app.get('*', (req, res) => {
 });
 
 // ==================== START SERVER ====================
-app.listen(PORT, () => {
-  console.log('');
-  console.log('  ╔═══════════════════════════════════════════╗');
-  console.log('  ║   🍖  MANDHI SERVER RUNNING  🍖           ║');
-  console.log(`  ║   App:    http://localhost:${PORT}             ║`);
-  console.log(`  ║   Admin:  http://localhost:${PORT}/admin        ║`);
-  console.log('  ╚═══════════════════════════════════════════╝');
-  console.log('');
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log('');
+    console.log('  ╔═══════════════════════════════════════════╗');
+    console.log('  ║   🍖  MANDHI SERVER RUNNING  🍖           ║');
+    console.log(`  ║   App:    http://localhost:${PORT}             ║`);
+    console.log(`  ║   Admin:  http://localhost:${PORT}/admin        ║`);
+    console.log('  ╚═══════════════════════════════════════════╝');
+    console.log('');
+  });
+}
+
+module.exports = app;
