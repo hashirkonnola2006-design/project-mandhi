@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandhi - Authentic Taste</title>
+  <!-- Google Fonts: Outfit for headings, Poppins for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css?v=33">
+</head>
+<body>
+
+  <!-- App Wrapper (Renders centered on desktop, full-screen on mobile) -->
+  <div class="app-container">
+    <div class="app-screen home-active">
+
+      <!-- ==================== HOME TAB ==================== -->
+      <section id="home-tab" class="tab-content active">
+        <!-- Hero Section (Full Bleed food photography layout) -->
+        <div class="hero-fullbleed">
+          
+          <!-- Header -->
+          <header class="hero-header">
+            <div class="logo">
+              <div class="arabic-logo">مندي</div>
+              <div class="english-logo">MANDHI</div>
+              <div class="logo-underline">
+                <svg width="40" height="6" viewBox="0 0 40 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 3C10 1.5 30 1.5 38 3" stroke="#FF7A00" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="20" cy="3" r="2" fill="#FF7A00"/>
+                </svg>
+              </div>
+            </div>
+            <button class="menu-btn hero-menu-btn" aria-label="Menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </header>
+
+          <!-- Absolute Hero Artwork Background Focal Element -->
+          <div class="hero-focal-artwork">
+            <img src="assets/hero_new.jpg" class="hero-focal-img" alt="Delicious Mandhi Platter">
+          </div>
+
+          <!-- Hero Content Wrap (Overlay) -->
+          <div class="hero-content-wrap">
+            <div class="hero-left-col">
+              <div class="hero-small-tag">NOT JUST A MEAL,</div>
+              <h1 class="hero-title-giant-new">
+                <span class="this-is-text">AUTHENTIC</span><br>
+                <span class="mandhi-text">MANDHI</span>
+              </h1>
+              
+              <!-- Thin orange decorative divider with a small floral/star icon centered on it -->
+              <div class="hero-divider-line">
+                <div class="line-left"></div>
+                <span class="divider-floral-star">✦</span>
+                <div class="line-right"></div>
+              </div>
+
+              <p class="hero-subtitle-new">Slow-cooked to perfection. <br>Authentic taste in every bite.</p>
+
+              <!-- CTA Buttons Stacked Vertically, Left-Aligned -->
+              <div class="hero-ctas-stacked">
+                <button class="btn btn-primary join-waitlist-trigger">
+                  <span class="btn-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </span>
+                  JOIN WAITLIST <span class="arrow-icon">➔</span>
+                </button>
+                
+                <button class="btn btn-secondary play-games-trigger">
+                  <span class="btn-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="6" width="20" height="12" rx="3" ry="3"/>
+                      <path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>
+                    </svg>
+                  </span>
+                  PLAY GAMES <span class="arrow-icon">➔</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Strip (Rounded card below hero) -->
+        <div class="features-strip-container section-spacing">
+          <div class="features-strip-card">
+            <!-- Item 1: Traditional Recipe -->
+            <div class="feature-strip-item">
+              <div class="feature-strip-icon">
+                <!-- Pot Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 10h18"/>
+                  <path d="M19 10v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-9"/>
+                  <path d="M12 2v4"/>
+                  <path d="M8 6h8"/>
+                </svg>
+              </div>
+              <h4 class="feature-strip-title">TRADITIONAL RECIPE</h4>
+              <p class="feature-strip-desc">Rooted in tradition, loved for generations.</p>
+            </div>
+            
+            <!-- Item 2: Finest Ingredients -->
+            <div class="feature-strip-item">
+              <div class="feature-strip-icon">
+                <!-- Leaf Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 22C2 22 8 22 13 17C18 12 22 6 22 2C22 2 18 2 13 7C8 12 2 18 2 22Z"/>
+                  <path d="M2 22L9 15"/>
+                </svg>
+              </div>
+              <h4 class="feature-strip-title">FINEST INGREDIENTS</h4>
+              <p class="feature-strip-desc">Handpicked for quality and purity.</p>
+            </div>
+
+            <!-- Item 3: Rich Aroma & Flavour -->
+            <div class="feature-strip-item">
+              <div class="feature-strip-icon">
+                <!-- Flame Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                </svg>
+              </div>
+              <h4 class="feature-strip-title">RICH AROMA & FLAVOUR</h4>
+              <p class="feature-strip-desc">Slow-cooked for unmatched taste.</p>
+            </div>
+
+            <!-- Item 4: Made With Passion -->
+            <div class="feature-strip-item">
+              <div class="feature-strip-icon">
+                <!-- Heart Icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <h4 class="feature-strip-title">MADE WITH PASSION</h4>
+              <p class="feature-strip-desc">Every plate served with care.</p>
+            </div>
+          </div>
+        </div>
+        <!-- 1. Featured Dishes Carousel (Vertical Block) -->
+        <div class="promo-carousel-container home-section">
+          <div class="promo-carousel-track" id="promo-carousel-track">
+            
+            <!-- Card 1: Signature Platter -->
+            <div class="promo-card-container signature-platter-box">
+              <div class="promo-badge">Chef's Signature ✦</div>
+              <div class="promo-flex-wrap">
+                <div class="promo-info">
+                  <h3 class="promo-card-title">Signature Platter</h3>
+                  <p class="promo-card-desc">Our finest selection of roasted meats and fragrant traditional rice.</p>
+                  <div class="promo-price-row">
+                    <span class="promo-price">₹1,299</span>
+                    <span class="promo-original-price">₹1,499</span>
+                  </div>
+                  <button class="btn-promo-action view-signature-trigger" data-item="mixed_platter">View Details</button>
+                </div>
+                <div class="promo-img-wrap">
+                  <div class="promo-dashed-glow"></div>
+                  <img src="assets/mixed_platter.png" class="promo-floating-img" alt="Signature Platter">
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Lamb Mandhi -->
+            <div class="promo-card-container signature-platter-box">
+              <div class="promo-badge">Chef's Signature ✦</div>
+              <div class="promo-flex-wrap">
+                <div class="promo-info">
+                  <h3 class="promo-card-title">Lamb Mandhi</h3>
+                  <p class="promo-card-desc">Premium slow-cooked tender lamb shanks over signature spiced rice.</p>
+                  <div class="promo-price-row">
+                    <span class="promo-price">₹750</span>
+                    <span class="promo-original-price">₹850</span>
+                  </div>
+                  <button class="btn-promo-action view-signature-trigger" data-item="lamb_mandhi">View Details</button>
+                </div>
+                <div class="promo-img-wrap">
+                  <div class="promo-dashed-glow"></div>
+                  <img src="assets/lamb_mandhi.png" class="promo-floating-img" alt="Lamb Mandhi">
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Chicken Mandhi -->
+            <div class="promo-card-container signature-platter-box">
+              <div class="promo-badge">Chef's Signature ✦</div>
+              <div class="promo-flex-wrap">
+                <div class="promo-info">
+                  <h3 class="promo-card-title">Chicken Mandhi</h3>
+                  <p class="promo-card-desc">Fragrant basmati rice served with slow-cooked whole chicken.</p>
+                  <div class="promo-price-row">
+                    <span class="promo-price">₹580</span>
+                    <span class="promo-original-price">₹650</span>
+                  </div>
+                  <button class="btn-promo-action view-signature-trigger" data-item="chicken_mandhi">View Details</button>
+                </div>
+                <div class="promo-img-wrap">
+                  <div class="promo-dashed-glow"></div>
+                  <img src="assets/chicken_mandhi.png" class="promo-floating-img" alt="Chicken Mandhi">
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- Carousel Dots Indicators -->
+          <div class="promo-carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <!-- 2. Spin the Wheel Banner (Vertical Block) -->
+        <div class="home-section">
+          <div class="promo-card-container spin-card spin-teaser-trigger" style="cursor: pointer;">
+            <div class="promo-badge">Spin &amp; Win ✦</div>
+            <h3 class="promo-title">Spin the Wheel</h3>
+            <p class="promo-desc">Try your luck and earn rewards.</p>
+          </div>
+        </div>
+        
+
+        <!-- Guest Reviews Section (White Background) -->
+        <div class="google-reviews-card-container home-section">
+          <div class="reviews-header-block-new">
+            <div class="reviews-title-wrap-new">
+              <div class="reviews-sub-new">LOVED BY THOUSANDS</div>
+              <h2 class="reviews-title-new">GUEST REVIEWS</h2>
+              <div class="reviews-score-block-new">
+                <span class="reviews-score-giant-new">4.8</span>
+                <div class="stars-column-new">
+                  <span class="stars-new">
+                    <span class="star-new filled">★</span>
+                    <span class="star-new filled">★</span>
+                    <span class="star-new filled">★</span>
+                    <span class="star-new filled">★</span>
+                    <span class="star-new half">★</span>
+                  </span>
+                  <span class="reviews-count-new">(2,350+ reviews)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stagger Testimonials Slider -->
+          <div class="stagger-testimonials-container" id="stagger-testimonials-container">
+            <div class="stagger-testimonials-track" id="stagger-testimonials-track">
+              <!-- Dynamically populated via app.js -->
+            </div>
+            
+            <!-- Stagger Chevron controls -->
+            <div class="stagger-testimonials-controls">
+              <button class="stagger-control-btn" id="stagger-prev-btn" aria-label="Previous testimonial">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="stagger-control-btn" id="stagger-next-btn" aria-label="Next testimonial">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== MENU TAB ==================== -->
+      <section id="menu-tab" class="tab-content">
+        <!-- Header -->
+        <header class="app-header">
+          <div class="logo">
+            <div class="arabic-logo">مندي</div>
+            <div class="english-logo">MANDHI</div>
+            <div class="logo-divider"></div>
+          </div>
+          <button class="menu-btn" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+
+        <!-- List View -->
+        <div id="menu-list-view" class="menu-subview active">
+          <div class="menu-header">
+            <h1 class="menu-title">Today's Special</h1>
+            <p class="menu-subtitle">Fresh Mandhi Menu</p>
+          </div>
+
+          <!-- Tabs subnav -->
+          <div class="menu-tabs-bar">
+            <div class="menu-tabs">
+              <button class="menu-tab-btn active">
+                <span class="tab-dot"></span> Mandhi
+              </button>
+            </div>
+            <button class="filter-btn" aria-label="Filter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M6 12H18M10 18H14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Food items grid (2 columns) -->
+          <div class="food-grid">
+            <!-- Item 1: Chicken Mandhi -->
+            <div class="food-card" data-item-id="chicken_mandhi">
+              <button class="favorite-heart-btn" aria-label="Add to Watchlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                </svg>
+              </button>
+              <div class="food-img-container">
+                <div class="food-dashed-border"></div>
+                <img src="assets/chicken_mandhi.png" alt="Chicken Mandhi" class="food-img">
+              </div>
+              <div class="food-info-card">
+                <h3>Chicken Mandhi</h3>
+                <p>Slow-cooked on fire</p>
+                <div class="food-footer">
+                  <span class="price">₹180</span>
+                  <button class="view-detail-btn" data-item="chicken_mandhi" aria-label="View Chicken Mandhi Details">
+                    ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2: Lamb Mandhi -->
+            <div class="food-card" data-item-id="lamb_mandhi">
+              <button class="favorite-heart-btn" aria-label="Add to Watchlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                </svg>
+              </button>
+              <div class="food-img-container">
+                <div class="food-dashed-border"></div>
+                <img src="assets/lamb_mandhi.png" alt="Lamb Mandhi" class="food-img">
+              </div>
+              <div class="food-info-card">
+                <h3>Lamb Mandhi</h3>
+                <p>Marinated overnight</p>
+                <div class="food-footer">
+                  <span class="price">₹220</span>
+                  <button class="view-detail-btn" data-item="lamb_mandhi" aria-label="View Lamb Mandhi Details">
+                    ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3: Mutton Mandhi -->
+            <div class="food-card" data-item-id="mutton_mandhi">
+              <button class="favorite-heart-btn" aria-label="Add to Watchlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                </svg>
+              </button>
+              <div class="food-img-container">
+                <div class="food-dashed-border"></div>
+                <img src="assets/mutton_mandhi.png" alt="Mutton Mandhi" class="food-img">
+              </div>
+              <div class="food-info-card">
+                <h3>Mutton Mandhi</h3>
+                <p>Tender & smoky</p>
+                <div class="food-footer">
+                  <span class="price">₹180</span>
+                  <button class="view-detail-btn" data-item="mutton_mandhi" aria-label="View Mutton Mandhi Details">
+                    ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4: Mixed Platter -->
+            <div class="food-card" data-item-id="mixed_platter">
+              <button class="favorite-heart-btn" aria-label="Add to Watchlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                </svg>
+              </button>
+              <div class="food-img-container">
+                <div class="food-dashed-border"></div>
+                <img src="assets/mixed_platter.png" alt="Mixed Platter" class="food-img">
+              </div>
+              <div class="food-info-card">
+                <h3>Mixed Platter</h3>
+                <p>Slow-cooked on fire</p>
+                <div class="food-footer">
+                  <span class="price">₹180</span>
+                  <button class="view-detail-btn" data-item="mixed_platter" aria-label="View Mixed Platter Details">
+                    ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="menu-detail-view" class="menu-subview">
+          <!-- Top cream card -->
+          <div class="detail-header-card">
+            <button class="back-btn" id="detail-back-btn" aria-label="Back to Menu List">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <h1 class="detail-title">
+              <span id="detail-title-line1">Chicken</span><br>
+              <span id="detail-title-line2">Mandhi</span>
+            </h1>
+            <p class="detail-description" id="detail-description-text">
+              Slow-cooked whole chicken over fragrant basmati rice, served with tomato sauce and salata
+            </p>
+          </div>
+
+          <!-- Size Selector Buttons -->
+          <div class="size-selector-wrap">
+            <div class="size-selector">
+              <button class="size-btn" data-size="Quarter">Quarter</button>
+              <button class="size-btn" data-size="Half">Half</button>
+              <button class="size-btn active" data-size="Full">Full</button>
+            </div>
+          </div>
+
+          <!-- Detail Large Image -->
+          <div class="detail-image-container">
+            <img src="assets/chicken_mandhi.png" alt="Chicken Mandhi Detailed Platter" class="detail-image" id="detail-large-img">
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== WAITING LIST TAB ==================== -->
+      <section id="waiting-list-tab" class="tab-content">
+        <!-- Header -->
+        <header class="app-header">
+          <div class="logo">
+            <div class="arabic-logo">مندي</div>
+            <div class="english-logo">MANDHI</div>
+            <div class="logo-divider"></div>
+          </div>
+          <button class="menu-btn" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+
+        <!-- Decorative Top Right Asset -->
+        <img src="assets/waiting_list_top_deco.png" alt="Top Decoration" class="wl-top-deco">
+
+        <!-- Decorative Bottom Right Asset -->
+        <img src="assets/waiting_list_bottom_deco.png" alt="Bottom Decoration" class="wl-bottom-deco">
+
+        <div class="wl-header">
+          <h1 class="wl-title">Waiting List</h1>
+          <p class="wl-subtitle">We’ll seat you as soon as your turn comes.</p>
+          <div class="wl-orange-line"></div>
+        </div>
+
+
+        <div class="wl-queue-section">
+          <div class="wl-queue-header">
+            <h2 class="wl-queue-title">Queue</h2>
+            <div class="wl-update-status">
+              <span class="pulse-dot"></span>
+              <span class="live-text">Live updates</span>
+              <span class="divider-dot">•</span>
+              <span>Last updated: <span id="wl-last-updated-text">Just now</span></span>
+              <button class="wl-refresh-btn" id="wl-refresh-btn" aria-label="Refresh Queue">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="wl-table-header">
+            <span class="wl-col-num">#</span>
+            <span class="wl-col-name">Name</span>
+            <span class="wl-col-people">No. of People</span>
+          </div>
+
+          <div class="wl-queue-list" id="wl-queue-list">
+            <!-- Rendered dynamically via app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== GAMES TAB ==================== -->
+      <section id="games-tab" class="tab-content">
+        <!-- Header -->
+        <header class="app-header">
+          <div class="logo">
+            <div class="arabic-logo">مندي</div>
+            <div class="english-logo">MANDHI</div>
+            <div class="logo-divider"></div>
+          </div>
+          <button class="menu-btn" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </header>
+
+        <!-- Games Intro -->
+        <div class="games-intro">
+          <h1 class="games-title">GAMES</h1>
+          <h2 class="games-subtitle">PLAY, SPIN & WIN!</h2>
+          <p class="games-desc">Play our exciting games and stand a chance to win amazing rewards!</p>
+        </div>
+
+        <!-- Games Grid (2 columns) -->
+        <div class="games-grid">
+          <!-- Game Box 1: Spin the Wheel -->
+          <div class="game-preview-card playable" data-game="spin">
+            <div class="game-preview-icon">🎡</div>
+            <h3>SPIN THE WHEEL</h3>
+            <p>Spin the name wheel to decide!</p>
+            <span class="play-badge">PLAY NOW ➔</span>
+          </div>
+
+          <!-- Game Box 2: Flappy Mandhi -->
+          <div class="game-preview-card playable" data-game="flappy">
+            <div class="game-preview-icon">🍗</div>
+            <h3>FLAPPY MANDHI</h3>
+            <p>Flap the roasted chicken past pillars!</p>
+            <span class="play-badge">PLAY NOW ➔</span>
+          </div>
+
+          <!-- Game Box 3: Quiz Challenge -->
+          <div class="game-preview-card locked">
+            <div class="game-preview-icon">❓</div>
+            <h3>QUIZ CHALLENGE</h3>
+            <p>Test your food knowledge.</p>
+            <span class="lock-badge">COMING SOON</span>
+          </div>
+
+          <!-- Game Box 4: Memory Match -->
+          <div class="game-preview-card locked">
+            <div class="game-preview-icon">🎴</div>
+            <h3>MEMORY MATCH</h3>
+            <p>Match cards & win coupons.</p>
+            <span class="lock-badge">COMING SOON</span>
+          </div>
+
+          <!-- Game Box 5: Scratch & Win -->
+          <div class="game-preview-card locked">
+            <div class="game-preview-icon">🪙</div>
+            <h3>SCRATCH & WIN</h3>
+            <p>Reveal hidden discounts.</p>
+            <span class="lock-badge">COMING SOON</span>
+          </div>
+
+          <!-- Game Box 6: Sudoku Chef -->
+          <div class="game-preview-card locked">
+            <div class="game-preview-icon">🔢</div>
+            <h3>SUDOKU CHEF</h3>
+            <p>A spicy puzzle challenge.</p>
+            <span class="lock-badge">COMING SOON</span>
+          </div>
+        </div>
+
+        <!-- Hidden Game Containers (Activated in Fullscreen) -->
+        <div id="active-game-containers" style="display: none;">
+          <!-- Game 1: Spin the Wheel (Pixelated Wood Theme) -->
+          <div class="game-card pixel-game-card pixel-spin-card" id="spin-game-card">
+            <div class="pixel-wood-border">
+              <div class="pixel-header">
+                <h3>SPIN THE WHEEL</h3>
+                <p>Spin and win exciting rewards!</p>
+              </div>
+
+              <!-- Names input panel -->
+              <div class="pixel-names-panel">
+                <div class="pixel-input-header">
+                  <span class="pixel-input-title">INPUTS</span>
+                </div>
+                <div class="pixel-input-row">
+                  <input type="text" id="wheel-name-add-input" placeholder="Type name..." />
+                  <button class="pixel-btn pixel-btn-amber" id="wheel-name-add-btn" style="padding: 6px 12px; font-size: 14px;">+</button>
+                </div>
+                <!-- Scrollable list of names -->
+                <div class="pixel-names-list" id="wheel-names-list">
+                  <!-- Generated dynamically in app.js -->
+                </div>
+              </div>
+
+              <!-- Wheel Outer Container -->
+              <div class="wheel-outer-container">
+                <div class="wheel-drumstick-pointer"></div>
+                <div class="wheel-canvas-container">
+                  <canvas id="wheelCanvas" width="280" height="280"></canvas>
+                  <div class="wheel-center-peg"></div>
+                </div>
+              </div>
+
+              <button class="pixel-btn pixel-btn-orange" id="spin-btn">
+                SPIN NOW ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Game 2: Flappy Chicken / Mandhi (Working Game) -->
+          <div class="game-card pixel-game-card pixel-flappy-card" id="flappy-game-card">
+            <div class="pixel-wood-border">
+              <div class="pixel-header">
+                <h3>FLAPPY MANDHI</h3>
+                <p>Tap to flap the roasted chicken!</p>
+              </div>
+              
+              <div class="flappy-scores-row">
+                <div class="flappy-score-box">
+                  <span class="label">SCORE</span>
+                  <span class="value" id="flappy-score">0</span>
+                </div>
+                <div class="flappy-score-box">
+                  <span class="label">BEST</span>
+                  <span class="value" id="flappy-best">0</span>
+                </div>
+              </div>
+
+              <div class="flappy-canvas-container">
+                <canvas id="flappyCanvas" width="280" height="320"></canvas>
+                <div class="flappy-start-overlay" id="flappy-overlay">
+                  <div class="flappy-logo">FLAPPY MANDHI</div>
+                  <div class="flappy-instruction">TAP SCREEN TO PLAY</div>
+                  <button class="pixel-btn pixel-btn-orange" id="flappy-start-btn">START GAME</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Fullscreen Overlay -->
+        <div id="game-fullscreen-overlay" class="game-fullscreen-overlay">
+          <div class="game-fullscreen-header">
+            <button id="exit-game-btn" class="pixel-btn pixel-btn-red">✖ EXIT GAME</button>
+          </div>
+          <div class="game-fullscreen-body">
+            <!-- Selected game card will be moved here dynamically -->
+          </div>
+        </div>
+
+        <!-- Rewards Promo Banner -->
+        <div class="rewards-banner">
+          <div class="trophy-wrap">
+            <div class="trophy-badge">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/>
+                <path d="M12 2a8.26 8.26 0 0 0-8 8a8 8 0 0 0 16 0a8.26 8.26 0 0 0-8-8z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="banner-text">
+            <h3>WIN EXCITING REWARDS!</h3>
+            <p>Play games, earn rewards, and enjoy delicious Mandhi!</p>
+          </div>
+          <div class="giftbox-wrap">
+            <div class="gift-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="8" width="18" height="4"/>
+                <rect x="5" y="12" width="14" height="10"/>
+                <path d="M12 22V8"/>
+                <path d="M12 8H7.5a2.5 2.5 0 0 1 0-5C9.25 3 11 5 12 8Z"/>
+                <path d="M12 8h4.5a2.5 2.5 0 0 0 0-5C14.75 3 13 5 12 8Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer-block">
+          <div class="footer-logo">
+            <div class="arabic-logo">مندي</div>
+            <div class="english-logo">MANDHI</div>
+            <div class="logo-divider"></div>
+          </div>
+          <p class="footer-desc">Authentic Mandhi, made with tradition, served with love.</p>
+          
+          <div class="footer-links-wrap">
+            <h4>QUICK LINKS</h4>
+            <ul class="footer-links">
+              <li><button class="link-btn navigate-home">Home</button></li>
+              <li><button class="link-btn navigate-menu">Menu</button></li>
+              <li><button class="link-btn waitlist-modal-btn">About Us</button></li>
+              <li><button class="link-btn waitlist-modal-btn">Contact</button></li>
+            </ul>
+          </div>
+
+          <div class="footer-socials-wrap">
+            <h4>FOLLOW US</h4>
+            <div class="social-icons">
+              <!-- Instagram -->
+              <a href="#" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <!-- Facebook -->
+              <a href="#" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <!-- WhatsApp -->
+              <a href="#" aria-label="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <p class="copyright">© 2026 Mandhi. All rights reserved.</p>
+        </footer>
+      </section>
+
+      <!-- ==================== STICKY BOTTOM NAV BAR ==================== -->
+      <nav class="bottom-nav apple-dock-nav">
+        <button class="nav-item active" data-tab="home-tab" aria-label="Home">
+          <span class="nav-icon bg-orange-light text-orange">
+            <!-- Home outline -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="active-indicator-dot"></span>
+        </button>
+
+        <button class="nav-item" data-tab="waiting-list-tab" aria-label="Waiting List">
+          <span class="nav-icon bg-orange-light text-orange">
+            <!-- Two people outline -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+          <span class="active-indicator-dot"></span>
+        </button>
+
+        <button class="nav-item" data-tab="menu-tab" aria-label="Menu">
+          <span class="nav-icon bg-orange-light text-orange">
+            <!-- Menu outline/list -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="active-indicator-dot"></span>
+        </button>
+
+        <button class="nav-item" data-tab="games-tab" aria-label="Games">
+          <span class="nav-icon bg-orange-light text-orange">
+            <!-- Game controller outline -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="6" width="20" height="12" rx="3" ry="3"/>
+              <path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>
+            </svg>
+          </span>
+          <span class="active-indicator-dot"></span>
+        </button>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- ==================== JOIN WAITLIST MODAL ==================== -->
+  <div class="modal-overlay" id="waitlist-modal">
+    <div class="modal-card">
+      <button class="close-modal-btn" aria-label="Close modal">×</button>
+      <div class="modal-logo">مندي</div>
+      <h2>Join the Mandhi Waitlist</h2>
+      <p>Enter your details below to secure a table or get notified when we open near you!</p>
+      
+      <form id="waitlist-form">
+        <div class="form-group">
+          <label for="wl-name">Full Name</label>
+          <input type="text" id="wl-name" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="wl-phone">Phone Number</label>
+          <input type="tel" id="wl-phone" required placeholder="e.g. +91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label for="wl-email">Email Address</label>
+          <input type="email" id="wl-email" required placeholder="e.g. name@example.com">
+        </div>
+        <div class="form-group">
+          <label for="wl-party-size">Number of Guests</label>
+          <select id="wl-party-size" required>
+            <option value="" disabled selected>Select party size</option>
+            <option value="1">1 person</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6 people</option>
+            <option value="7">7 people</option>
+            <option value="8">8 people</option>
+            <option value="9">9 people</option>
+            <option value="10">10+ people</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary submit-waitlist-btn">
+          SUBMIT Waitlist <span class="arrow-icon">➔</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== SPIN THE WHEEL REWARD MODAL ==================== -->
+  <div class="modal-overlay" id="reward-modal">
+    <div class="modal-card reward-card">
+      <div class="reward-icon">🎉</div>
+      <h2>Congratulations!</h2>
+      <p>You spun the wheel and won:</p>
+      <div class="reward-display" id="reward-won-text">FREE DRINK</div>
+      <p class="reward-sub">Take a screenshot of this card to redeem your reward with your next order!</p>
+      <button class="btn btn-primary close-reward-btn">AWESOME!</button>
+    </div>
+  </div>
+
+  <!-- ==================== NAME PICKER POPUP MODAL ==================== -->
+  <div class="modal-overlay" id="name-picker-modal">
+    <div class="modal-card reward-card pixel-modal-card">
+      <div class="reward-icon">🍗</div>
+      <h2>SELECTED NAME</h2>
+      <div class="reward-display" id="selected-name-display">Lucky Zaika</div>
+      <p class="reward-sub">Would you like to keep this name or remove it from the list?</p>
+      <div class="pixel-modal-actions">
+        <button class="pixel-btn pixel-btn-red" id="remove-name-btn">REMOVE NAME</button>
+        <button class="pixel-btn pixel-btn-green" id="continue-name-btn">CONTINUE</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=15"></script>
+</body>
+</html>

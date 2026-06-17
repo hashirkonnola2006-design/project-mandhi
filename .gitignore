@@ -1,0 +1,4 @@
+node_modules/
+mandhi-db.json
+.DS_Store
+.env

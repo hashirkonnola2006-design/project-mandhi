@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandhi Admin — Waitlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ==================== TOKENS ==================== */
+    :root {
+      --orange: #FF7A00;
+      --orange-dark: #D96500;
+      --orange-glow: rgba(255, 122, 0, 0.08);
+      --orange-border: rgba(255, 122, 0, 0.25);
+      --bg: #f8f9fa;
+      --bg-2: #ffffff;
+      --bg-3: #f1f3f5;
+      --bg-4: #f8f9fa;
+      --border: rgba(0, 0, 0, 0.06);
+      --border-s: rgba(0, 0, 0, 0.08);
+      --text: #1e293b;
+      --text-2: #475569;
+      --text-3: #64748b;
+      --green: #16a34a;
+      --green-bg: rgba(22, 163, 74, 0.08);
+      --green-border: rgba(22, 163, 74, 0.22);
+      --red: #dc2626;
+      --red-bg: rgba(220, 38, 38, 0.08);
+      --red-border: rgba(220, 38, 38, 0.20);
+      --amber: #d97706;
+      --amber-bg: rgba(217, 119, 6, 0.08);
+      --amber-border: rgba(217, 119, 6, 0.22);
+      --r: 14px;
+      --r-sm: 9px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    select {
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    /* =====================================================
+       LOGIN SCREEN
+     ===================================================== */
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 25%, #fff5ed 0%, #f3f4f6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .login-wrap {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .login-brand {
+      text-align: center;
+    }
+
+    .l-arabic {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--orange);
+      text-shadow: 0 4px 20px rgba(255, 122, 0, 0.15);
+      line-height: 1;
+    }
+
+    .l-english {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.38em;
+      color: var(--text-2);
+      margin-top: 4px;
+    }
+
+    .l-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--orange-glow);
+      border: 1px solid var(--orange-border);
+      color: var(--orange);
+      font-size: 0.67rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      background: var(--bg-2);
+      border: 1px solid var(--border-s);
+      border-radius: 22px;
+      padding: 34px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 122, 0, 0.02);
+    }
+
+    .lc-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .lc-sub {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      text-align: center;
+      margin-top: -12px;
+      line-height: 1.5;
+    }
+
+    .f-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .f-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .f-input {
+      background: var(--bg-4);
+      border: 1.5px solid var(--border-s);
+      border-radius: var(--r-sm);
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      color: var(--text);
+      width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .f-input:focus {
+      border-color: var(--orange);
+      background: #ffffff;
+    }
+
+    .f-input::placeholder {
+      color: var(--text-3);
+      opacity: 0.7;
+    }
+
+    .login-error {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: var(--r-sm);
+      color: var(--red);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: center;
+      display: none;
+    }
+
+    .login-error.show {
+      display: block;
+    }
+
+    .login-btn {
+      background: var(--orange);
+      color: #fff;
+      border-radius: var(--r-sm);
+      padding: 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(255, 122, 0, 0.28);
+      transition: background 0.2s, transform 0.12s, box-shadow 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(255, 122, 0, 0.38);
+    }
+
+    .login-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* =====================================================
+       ADMIN APP
+    ===================================================== */
+    #admin-app {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    #admin-app.visible {
+      display: flex;
+    }
+
+    /* --- Topbar --- */
+    .topbar {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 26px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .tb-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tb-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+    }
+
+    .tb-pill {
+      background: var(--orange-glow);
+      border: 1px solid var(--orange-border);
+      color: var(--orange);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      padding: 2px 9px;
+      border-radius: 20px;
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      padding: 4px 11px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse-l 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-l {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.35;
+        transform: scale(0.7);
+      }
+    }
+
+    .tb-btn {
+      background: var(--bg-4);
+      border: 1px solid var(--border-s);
+      color: var(--text-2);
+      border-radius: 8px;
+      padding: 6px 13px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .tb-btn:hover {
+      background: var(--bg-3);
+      color: var(--text);
+    }
+
+    /* --- Page body --- */
+    .page-body {
+      flex: 1;
+      padding: 26px;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* --- Stats strip (2 only — no wait time) --- */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .stat-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-box:hover {
+      border-color: var(--orange-border);
+    }
+
+    .s-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .s-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .s-num.orange {
+      color: var(--orange);
+    }
+
+    .s-num.green {
+      color: var(--green);
+    }
+
+    .s-sub {
+      font-size: 0.7rem;
+      color: var(--text-3);
+    }
+
+    /* --- Main card --- */
+    .main-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    /* Card header */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-head-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .count-pill {
+      background: var(--orange-glow);
+      border: 1px solid var(--orange-border);
+      color: var(--orange);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+
+    .clear-btn {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      color: var(--red);
+      border-radius: 8px;
+      padding: 7px 13px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.18s;
+    }
+
+    .clear-btn:hover {
+      background: rgba(239, 68, 68, 0.18);
+    }
+
+    /* --- Add form --- */
+    .add-form {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 122, 0, 0.025);
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .af-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .af-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .af-input {
+      background: var(--bg-3);
+      border: 1.5px solid var(--border-s);
+      border-radius: var(--r-sm);
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .af-input:focus {
+      border-color: var(--orange);
+      background: #ffffff;
+    }
+
+    .af-input::placeholder {
+      color: var(--text-3);
+      opacity: 0.7;
+    }
+
+    .af-input.narrow {
+      max-width: 105px;
+    }
+
+    .add-btn {
+      background: var(--orange);
+      color: #fff;
+      border-radius: var(--r-sm);
+      padding: 9px 18px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(255, 122, 0, 0.22);
+      transition: background 0.2s, transform 0.12s, box-shadow 0.2s;
+    }
+
+    .add-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.32);
+    }
+
+    .add-btn:active {
+      transform: scale(0.98);
+    }
+
+    .add-btn:disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    /* --- Queue table --- */
+    .q-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .q-table thead tr {
+      background: rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .q-table th {
+      padding: 10px 18px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.13em;
+      text-align: left;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .q-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .q-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .q-table tbody tr:hover {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    .q-table td {
+      padding: 12px 18px;
+      font-size: 0.9rem;
+      color: var(--text);
+      vertical-align: middle;
+    }
+
+    .td-rank {
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--orange);
+      width: 38px;
+    }
+
+    .td-name {
+      font-weight: 700;
+    }
+
+    .td-phone {
+      color: var(--text-2);
+      font-size: 0.84rem;
+    }
+
+    .td-party {
+      width: 90px;
+    }
+
+    .party-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-4);
+      border: 1px solid var(--border-s);
+      border-radius: 7px;
+      padding: 3px 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Live wait timer */
+    .td-timer {
+      width: 80px;
+    }
+
+    .wait-timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Color changes based on waiting duration */
+    .wait-timer.fresh {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+
+    .wait-timer.mid {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    .wait-timer.long {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+
+    /* Action buttons */
+    .td-actions {
+      width: 160px;
+    }
+
+    .action-wrap {
+      display: flex;
+      gap: 6px;
+    }
+
+    .seat-btn {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.18s;
+    }
+
+    .seat-btn:hover {
+      background: rgba(34, 197, 94, 0.18);
+    }
+
+    .seat-btn:active {
+      transform: scale(0.96);
+    }
+
+    .remove-btn {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      color: var(--red);
+      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.18s;
+    }
+
+    .remove-btn:hover {
+      background: rgba(239, 68, 68, 0.18);
+    }
+
+    .remove-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .empty-icon {
+      font-size: 2.6rem;
+      opacity: 0.55;
+    }
+
+    .empty-text {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
+    .empty-sub {
+      font-size: 0.76rem;
+      color: var(--text-3);
+    }
+
+    /* Table footer */
+    .card-foot {
+      padding: 9px 18px;
+      font-size: 0.7rem;
+      color: var(--text-3);
+      border-top: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+    #toast {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%) translateY(70px);
+      padding: 11px 20px;
+      border-radius: 11px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      z-index: 9999;
+      pointer-events: none;
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.28s;
+      white-space: nowrap;
+      opacity: 0;
+      background: var(--bg-3);
+      border: 1px solid var(--border-s);
+      color: var(--text);
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+      color: var(--green);
+    }
+
+    #toast.error {
+      background: var(--red-bg);
+      border-color: var(--red-border);
+      color: var(--red);
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+    @media (max-width: 620px) {
+
+      .topbar,
+      .page-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .q-table th:nth-child(3),
+      .q-table td:nth-child(3) {
+        display: none;
+      }
+
+      /* hide phone */
+      .af-input.narrow {
+        max-width: 100%;
+      }
+
+      .add-form {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================================
+     LOGIN SCREEN
+================================================ -->
+  <div id="login-screen">
+    <div class="login-wrap">
+
+      <div class="login-brand">
+        <div class="l-arabic">مندي</div>
+        <div class="l-english">MANDHI</div>
+        <div class="l-badge">STAFF PORTAL</div>
+      </div>
+
+      <div class="login-card">
+        <div class="lc-title">Welcome Back 👋</div>
+        <p class="lc-sub">Sign in with your staff credentials to manage the waitlist.</p>
+
+        <div class="f-group">
+          <div class="f-label">Username</div>
+          <input type="text" id="l-user" class="f-input" placeholder="Enter username" autocomplete="username">
+        </div>
+
+        <div class="f-group">
+          <div class="f-label">Password</div>
+          <input type="password" id="l-pass" class="f-input" placeholder="Enter password"
+            autocomplete="current-password">
+        </div>
+
+        <div class="login-error" id="login-error">❌ Incorrect username or password.</div>
+
+        <button class="login-btn" id="login-btn">SIGN IN →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================================================
+     ADMIN APP
+================================================ -->
+  <div id="admin-app">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="tb-brand">
+        <div class="tb-name">MANDHI</div>
+        <div class="tb-pill">ADMIN</div>
+      </div>
+      <div class="tb-right">
+        <div class="live-pill">
+          <div class="live-dot"></div>
+          LIVE
+        </div>
+        <button class="tb-btn" id="refresh-btn">↻ Refresh</button>
+        <button class="tb-btn" onclick="logout()">Sign Out</button>
+        <button class="tb-btn" onclick="window.location.href='/'">← Website</button>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <main class="page-body">
+
+      <!-- Stats (no wait time) -->
+      <div class="stat-strip">
+        <div class="stat-box">
+          <div class="s-label">Waiting Now</div>
+          <div class="s-num orange" id="stat-waiting">—</div>
+          <div class="s-sub">parties in queue</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-label">Seated Today</div>
+          <div class="s-num green" id="stat-seated">—</div>
+          <div class="s-sub">parties served</div>
+        </div>
+      </div>
+
+      <!-- Waitlist card -->
+      <div class="main-card">
+
+        <!-- Header -->
+        <div class="card-head">
+          <div class="card-head-left">
+            <div class="card-title">🟠 Live Waitlist</div>
+            <span class="count-pill" id="count-pill">0</span>
+          </div>
+          <button class="clear-btn" id="clear-all-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              <path d="M10 11v6M14 11v6" />
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+            </svg>
+            Remove All
+          </button>
+        </div>
+
+        <!-- Add guest form -->
+        <div class="add-form">
+          <div class="af-field">
+            <div class="af-label">Full Name *</div>
+            <input type="text" id="add-name" class="af-input" placeholder="e.g. Rahul Sharma">
+          </div>
+          <div class="af-field">
+            <div class="af-label">Phone Number</div>
+            <input type="tel" id="add-phone" class="af-input" placeholder="+91 98765 43210">
+          </div>
+          <div class="af-field" style="flex:0;">
+            <div class="af-label">No. of People *</div>
+            <input type="number" id="add-party" class="af-input narrow" placeholder="2" min="1" max="50">
+          </div>
+          <button class="add-btn" id="add-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+            Add to Queue
+          </button>
+        </div>
+
+        <!-- Table -->
+        <table class="q-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>People</th>
+              <th>Waiting</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="q-tbody">
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <div class="empty-icon">⏳</div>
+                  <div class="empty-text">Loading queue...</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Footer -->
+        <div class="card-foot">
+          Last refreshed: <span id="last-updated">—</span> &nbsp;·&nbsp; Timers update every second &nbsp;·&nbsp;
+          Auto-refresh every 15s
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <script>
+    // ======================================================
+    // CREDENTIALS — change these to your preferred values
+    // ======================================================
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'mandhi1234';
+
+    const API = window.location.origin;
+
+    // ======================================================
+    // LOGIN
+    // ======================================================
+    const loginScreen = document.getElementById('login-screen');
+    const adminApp = document.getElementById('admin-app');
+    const loginError = document.getElementById('login-error');
+    const lUser = document.getElementById('l-user');
+    const lPass = document.getElementById('l-pass');
+
+    function attemptLogin() {
+      if (lUser.value.trim() === ADMIN_USERNAME && lPass.value === ADMIN_PASSWORD) {
+        loginError.classList.remove('show');
+        loginScreen.style.display = 'none';
+        adminApp.classList.add('visible');
+        init();
+      } else {
+        loginError.classList.add('show');
+        lPass.value = '';
+        lPass.focus();
+        setTimeout(() => loginError.classList.remove('show'), 4000);
+      }
+    }
+
+    document.getElementById('login-btn').addEventListener('click', attemptLogin);
+    [lUser, lPass].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); }));
+
+    function logout() {
+      clearInterval(autoRefreshTimer);
+      clearInterval(timerTickInterval);
+      adminApp.classList.remove('visible');
+      loginScreen.style.display = 'flex';
+      lUser.value = '';
+      lPass.value = '';
+    }
+
+    // ======================================================
+    // TOAST
+    // ======================================================
+    const toastEl = document.getElementById('toast');
+    let toastTimer;
+
+    function showToast(msg, type = '') {
+      toastEl.textContent = msg;
+      toastEl.className = `show ${type}`;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toastEl.className = ''; }, 3200);
+    }
+
+    // ======================================================
+    // WAIT TIMER HELPERS
+    // ======================================================
+
+    /**
+     * Returns total seconds elapsed since a given ISO timestamp.
+     */
+    function secondsSince(isoString) {
+      return Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
+    }
+
+    /**
+     * Formats seconds into a human-readable live string.
+     * e.g. 0  → "Just now"
+     *      75 → "1m 15s"
+     *      3700 → "1h 1m"
+     */
+    function formatWait(secs) {
+      if (secs <= 0) return 'Just now';
+      if (secs < 60) return `${secs}s`;
+      const totalMins = Math.floor(secs / 60);
+      const s = secs % 60;
+      if (totalMins < 60) return `${totalMins}m ${String(s).padStart(2, '0')}s`;
+      const h = Math.floor(totalMins / 60);
+      const m = totalMins % 60;
+      return m > 0 ? `${h}h ${m}m` : `${h}h`;
+    }
+
+    /**
+     * Returns CSS class based on wait duration.
+     * Green < 15 min | Amber 15–30 | Red > 30
+     */
+    function timerClass(secs) {
+      const mins = secs / 60;
+      if (mins < 15) return 'fresh';
+      if (mins < 30) return 'mid';
+      return 'long';
+    }
+
+    /**
+     * Ticks every second — updates all live timer spans in the table
+     * without hitting the server.
+     */
+    function tickTimers() {
+      document.querySelectorAll('.wait-timer[data-joined]').forEach(span => {
+        const secs = secondsSince(span.getAttribute('data-joined'));
+        span.textContent = '⏱ ' + formatWait(secs);
+        span.className = 'wait-timer ' + timerClass(secs);
+      });
+    }
+
+    // ======================================================
+    // LOAD & RENDER QUEUE
+    // ======================================================
+    let autoRefreshTimer;
+    let timerTickInterval;
+
+    async function loadQueue() {
+      try {
+        const [qRes, allRes] = await Promise.all([
+          fetch(`${API}/api/queue`),
+          fetch(`${API}/api/admin/all`),
+        ]);
+
+        const qData = await qRes.json();
+        const allData = await allRes.json();
+
+        if (!qData.success) throw new Error(qData.error);
+
+        const queue = qData.queue;
+        const stats = qData.stats;
+        const seated = allData.success ? allData.summary.seated : '—';
+
+        // Update stats
+        document.getElementById('stat-waiting').textContent = String(stats.count).padStart(2, '0');
+        document.getElementById('stat-seated').textContent = String(seated).padStart(2, '0');
+        document.getElementById('count-pill').textContent = stats.count;
+
+        // Render rows
+        renderTable(queue);
+
+        // Timestamp
+        document.getElementById('last-updated').textContent =
+          new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('q-tbody').innerHTML = `
+        <tr><td colspan="6">
+          <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <div class="empty-text">Server unreachable</div>
+            <div class="empty-sub">Make sure <code>node server.js</code> is running.</div>
+          </div>
+        </td></tr>`;
+      }
+    }
+
+    function renderTable(queue) {
+      const tbody = document.getElementById('q-tbody');
+
+      if (queue.length === 0) {
+        tbody.innerHTML = `
+        <tr><td colspan="6">
+          <div class="empty-state">
+            <div class="empty-icon">🎉</div>
+            <div class="empty-text">Queue is empty!</div>
+            <div class="empty-sub">Add a guest above to get started.</div>
+          </div>
+        </td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = queue.map((entry, i) => {
+        const secs = secondsSince(entry.joined_at);
+        const cls = timerClass(secs);
+        const label = formatWait(secs);
+
+        return `
+        <tr id="row-${entry.id}">
+          <td class="td-rank">${String(i + 1).padStart(2, '0')}</td>
+          <td class="td-name">${esc(entry.name)}</td>
+          <td class="td-phone">${esc(entry.phone || '—')}</td>
+          <td class="td-party">
+            <span class="party-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              ${entry.party_size}
+            </span>
+          </td>
+          <td class="td-timer">
+            <span class="wait-timer ${cls}" data-joined="${esc(entry.joined_at)}">⏱ ${label}</span>
+          </td>
+          <td class="td-actions">
+            <div class="action-wrap">
+              <button class="seat-btn" onclick="seatEntry(${entry.id}, '${esc(entry.name)}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Seat
+              </button>
+              <button class="remove-btn" onclick="removeEntry(${entry.id}, '${esc(entry.name)}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                Remove
+              </button>
+            </div>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    function esc(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // ======================================================
+    // ADD GUEST
+    // ======================================================
+    document.getElementById('add-btn').addEventListener('click', async () => {
+      const name = document.getElementById('add-name').value.trim();
+      const phone = document.getElementById('add-phone').value.trim();
+      const party = parseInt(document.getElementById('add-party').value, 10);
+
+      if (!name) { showToast('Please enter a name.', 'error'); return; }
+      if (isNaN(party) || party < 1) { showToast('Please enter the number of people.', 'error'); return; }
+
+      const btn = document.getElementById('add-btn');
+      btn.disabled = true;
+      btn.textContent = 'Adding...';
+
+      try {
+        const res = await fetch(`${API}/api/admin/queue/add`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, party_size: party }),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+
+        showToast(`✔ ${name} added — position #${data.position}`, 'success');
+        document.getElementById('add-name').value = '';
+        document.getElementById('add-phone').value = '';
+        document.getElementById('add-party').value = '';
+
+        await loadQueue();
+      } catch (err) {
+        showToast('Failed to add guest.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        Add to Queue`;
+      }
+    });
+
+    document.getElementById('add-party').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('add-btn').click();
+    });
+
+    // ======================================================
+    // SEAT ENTRY (marks as 'seated')
+    // ======================================================
+    async function seatEntry(id, name) {
+      if (!confirm(`Mark "${name}" as seated? This will remove them from the live queue.`)) return;
+      try {
+        const res = await fetch(`${API}/api/queue/${id}?action=seated`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+        showToast(`✔ ${name} has been seated!`, 'success');
+        await loadQueue();
+      } catch (err) {
+        showToast('Failed to seat entry.', 'error');
+      }
+    }
+
+    // ======================================================
+    // REMOVE ENTRY (marks as 'cancelled')
+    // ======================================================
+    async function removeEntry(id, name) {
+      if (!confirm(`Remove "${name}" from the queue?`)) return;
+      try {
+        const res = await fetch(`${API}/api/queue/${id}?action=cancelled`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+        showToast(`${name} removed.`, '');
+        await loadQueue();
+      } catch (err) {
+        showToast('Failed to remove entry.', 'error');
+      }
+    }
+
+    // ======================================================
+    // CLEAR ALL
+    // ======================================================
+    document.getElementById('clear-all-btn').addEventListener('click', async () => {
+      const count = parseInt(document.getElementById('stat-waiting').textContent, 10);
+      if (count === 0) { showToast('Queue is already empty.', ''); return; }
+      if (!confirm(`Remove ALL ${count} parties from the queue? This cannot be undone.`)) return;
+
+      try {
+        const res = await fetch(`${API}/api/admin/queue/clear-all`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+        showToast(`✔ Cleared ${data.clearedCount} entries.`, 'success');
+        await loadQueue();
+      } catch (err) {
+        showToast('Failed to clear queue.', 'error');
+      }
+    });
+
+    // ======================================================
+    // REFRESH BUTTON
+    // ======================================================
+    document.getElementById('refresh-btn').addEventListener('click', async () => {
+      await loadQueue();
+      showToast('Refreshed!', 'success');
+    });
+
+    // ======================================================
+    // INIT — called after successful login
+    // ======================================================
+    function init() {
+      loadQueue();
+      // Auto-refresh data every 15 seconds
+      autoRefreshTimer = setInterval(loadQueue, 15000);
+      // Tick live timers every second — purely client-side, no server call
+      timerTickInterval = setInterval(tickTimers, 1000);
+    }
+  </script>
+</body>
+
+</html>
