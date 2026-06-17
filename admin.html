@@ -959,12 +959,6 @@
   <div id="toast"></div>
 
   <script>
-    // ======================================================
-    // CREDENTIALS — change these to your preferred values
-    // ======================================================
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'mandhi1234';
-
     const API = window.location.origin;
 
     // ======================================================
@@ -976,13 +970,28 @@
     const lUser = document.getElementById('l-user');
     const lPass = document.getElementById('l-pass');
 
-    function attemptLogin() {
-      if (lUser.value.trim() === ADMIN_USERNAME && lPass.value === ADMIN_PASSWORD) {
-        loginError.classList.remove('show');
-        loginScreen.style.display = 'none';
-        adminApp.classList.add('visible');
-        init();
-      } else {
+    async function attemptLogin() {
+      const username = lUser.value.trim();
+      const password = lPass.value;
+
+      try {
+        const res = await fetch(`${API}/api/admin/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+          credentials: 'include'
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          loginError.classList.remove('show');
+          loginScreen.style.display = 'none';
+          adminApp.classList.add('visible');
+          init();
+        } else {
+          throw new Error(data.error || 'Invalid credentials');
+        }
+      } catch (err) {
         loginError.classList.add('show');
         lPass.value = '';
         lPass.focus();
@@ -993,9 +1002,14 @@
     document.getElementById('login-btn').addEventListener('click', attemptLogin);
     [lUser, lPass].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); }));
 
-    function logout() {
+    async function logout() {
       clearInterval(autoRefreshTimer);
       clearInterval(timerTickInterval);
+      try {
+        await fetch(`${API}/api/admin/logout`, { method: 'POST', credentials: 'include' });
+      } catch (err) {
+        console.warn('Logout request failed:', err);
+      }
       adminApp.classList.remove('visible');
       loginScreen.style.display = 'flex';
       lUser.value = '';
@@ -1075,8 +1089,8 @@
     async function loadQueue() {
       try {
         const [qRes, allRes] = await Promise.all([
-          fetch(`${API}/api/queue`),
-          fetch(`${API}/api/admin/all`),
+          fetch(`${API}/api/queue`, { credentials: 'include' }),
+          fetch(`${API}/api/admin/all`, { credentials: 'include' }),
         ]);
 
         const qData = await qRes.json();
@@ -1199,6 +1213,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, phone, party_size: party }),
+          credentials: 'include',
         });
         const data = await res.json();
         if (!data.success) throw new Error(data.error);
@@ -1233,7 +1248,7 @@
     async function seatEntry(id, name) {
       if (!confirm(`Mark "${name}" as seated? This will remove them from the live queue.`)) return;
       try {
-        const res = await fetch(`${API}/api/queue/${id}?action=seated`, { method: 'DELETE' });
+        const res = await fetch(`${API}/api/queue/${id}?action=seated`, { method: 'DELETE', credentials: 'include' });
         const data = await res.json();
         if (!data.success) throw new Error(data.error);
         showToast(`✔ ${name} has been seated!`, 'success');
@@ -1249,7 +1264,7 @@
     async function removeEntry(id, name) {
       if (!confirm(`Remove "${name}" from the queue?`)) return;
       try {
-        const res = await fetch(`${API}/api/queue/${id}?action=cancelled`, { method: 'DELETE' });
+        const res = await fetch(`${API}/api/queue/${id}?action=cancelled`, { method: 'DELETE', credentials: 'include' });
         const data = await res.json();
         if (!data.success) throw new Error(data.error);
         showToast(`${name} removed.`, '');
@@ -1268,7 +1283,7 @@
       if (!confirm(`Remove ALL ${count} parties from the queue? This cannot be undone.`)) return;
 
       try {
-        const res = await fetch(`${API}/api/admin/queue/clear-all`, { method: 'DELETE' });
+        const res = await fetch(`${API}/api/admin/queue/clear-all`, { method: 'DELETE', credentials: 'include' });
         const data = await res.json();
         if (!data.success) throw new Error(data.error);
         showToast(`✔ Cleared ${data.clearedCount} entries.`, 'success');

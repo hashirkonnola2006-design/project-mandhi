@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!queueContainer) return;
 
     try {
-      const res = await fetch(`${API_BASE}/api/queue`);
+      const res = await fetch(`${API_BASE}/api/queue`, { credentials: 'include' });
       const data = await res.json();
 
       if (!data.success) throw new Error(data.error);
@@ -1708,6 +1708,7 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone, email, party_size }),
+        credentials: 'include',
       });
 
       const data = await res.json();

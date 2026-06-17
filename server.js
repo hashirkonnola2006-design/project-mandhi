@@ -6,14 +6,25 @@
 
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const db = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Credentials from environment variables
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'mandhi1234';
+const JWT_SECRET = process.env.JWT_SECRET || 'local_development_secret_key';
+
 // ==================== MIDDLEWARE ====================
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+app.use(cookieParser());
 app.use(express.json());
 
 // Serve all static files from the project root (index.html, app.js, assets/, etc.)
@@ -129,7 +140,7 @@ app.post('/api/queue/join', (req, res) => {
  * Admin-only: Manually add a guest to the queue (no email required).
  * Body: { name, phone, party_size }
  */
-app.post('/api/admin/queue/add', (req, res) => {
+app.post('/api/admin/queue/add', requireAdminAuth, (req, res) => {
   const { name, phone, party_size } = req.body;
 
   if (!name) {
@@ -174,7 +185,7 @@ app.post('/api/admin/queue/add', (req, res) => {
  * DELETE /api/admin/queue/clear-all
  * Marks ALL currently 'waiting' entries as 'cancelled' (clears the queue).
  */
-app.delete('/api/admin/queue/clear-all', (req, res) => {
+app.delete('/api/admin/queue/clear-all', requireAdminAuth, (req, res) => {
   try {
     const waiting = db.get('waitlist').filter({ status: 'waiting' }).value();
     waiting.forEach(entry => {
@@ -198,7 +209,7 @@ app.delete('/api/admin/queue/clear-all', (req, res) => {
  * Used by admin panel.
  * Query param: ?action=seated|cancelled  (defaults to 'seated')
  */
-app.delete('/api/queue/:id', (req, res) => {
+app.delete('/api/queue/:id', requireAdminAuth, (req, res) => {
   const id = parseInt(req.params.id, 10);
   const { action } = req.query;
   const newStatus = action === 'cancelled' ? 'cancelled' : 'seated';
@@ -225,11 +236,66 @@ app.delete('/api/queue/:id', (req, res) => {
 
 // ==================== ADMIN ROUTES ====================
 
+// Authentication Middleware
+function requireAdminAuth(req, res, next) {
+  const token = req.cookies.admin_session;
+  if (!token) {
+    return res.status(401).json({ success: false, error: 'Unauthorized. Session token is missing.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    if (decoded.username !== ADMIN_USERNAME) {
+      return res.status(401).json({ success: false, error: 'Unauthorized. Invalid session.' });
+    }
+    req.admin = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ success: false, error: 'Unauthorized. Session has expired or is invalid.' });
+  }
+}
+
+/**
+ * POST /api/admin/login
+ * Body: { username, password }
+ */
+app.post('/api/admin/login', (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(401).json({ success: false, error: 'Invalid username or password.' });
+  }
+
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    // Generate JWT token
+    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '8h' });
+
+    // Set cookie
+    res.cookie('admin_session', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production' || !!process.env.VERCEL,
+      sameSite: 'lax',
+      maxAge: 8 * 60 * 60 * 1000 // 8 hours
+    });
+
+    return res.json({ success: true, message: 'Logged in successfully.' });
+  }
+
+  return res.status(401).json({ success: false, error: 'Invalid username or password.' });
+});
+
+/**
+ * POST /api/admin/logout
+ */
+app.post('/api/admin/logout', (req, res) => {
+  res.clearCookie('admin_session');
+  res.json({ success: true, message: 'Logged out successfully.' });
+});
+
 /**
  * GET /api/admin/all
  * Returns ALL entries (waiting, seated, cancelled) for admin view.
  */
-app.get('/api/admin/all', (req, res) => {
+app.get('/api/admin/all', requireAdminAuth, (req, res) => {
   try {
     const all = db.get('waitlist').sortBy('id').reverse().value();
 
@@ -251,7 +317,7 @@ app.get('/api/admin/all', (req, res) => {
  * DELETE /api/admin/clear
  * Permanently removes all entries with 'seated' or 'cancelled' status.
  */
-app.delete('/api/admin/clear', (req, res) => {
+app.delete('/api/admin/clear', requireAdminAuth, (req, res) => {
   try {
     const before = db.get('waitlist').size().value();
     db.get('waitlist')
@@ -307,7 +373,7 @@ app.post('/api/rewards/save', (req, res) => {
  * GET /api/admin/rewards
  * Returns all spin reward records for admin view.
  */
-app.get('/api/admin/rewards', (req, res) => {
+app.get('/api/admin/rewards', requireAdminAuth, (req, res) => {
   try {
     const rewards = db.get('spin_rewards').sortBy('id').reverse().value();
     res.json({ success: true, rewards });
@@ -321,7 +387,7 @@ app.get('/api/admin/rewards', (req, res) => {
  * POST /api/admin/rewards/:id/redeem
  * Marks a spin reward as redeemed.
  */
-app.post('/api/admin/rewards/:id/redeem', (req, res) => {
+app.post('/api/admin/rewards/:id/redeem', requireAdminAuth, (req, res) => {
   const id = parseInt(req.params.id, 10);
   try {
     const reward = db.get('spin_rewards').find({ id }).value();
