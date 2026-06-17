@@ -77,7 +77,8 @@ body {
 @media screen and (min-width: 600px) {
   .app-screen {
     width: 420px;
-    height: 860px;
+    height: 90vh;
+    max-height: 860px;
     border-radius: 40px;
     border: 12px solid #1c1c1c; /* Bezel */
     position: relative;
