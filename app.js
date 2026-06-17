@@ -421,13 +421,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  let startX = 0;
+  let isDragging = false;
+
   if (container) {
     container.addEventListener('mouseenter', stopAutoPlay);
-    container.addEventListener('mouseleave', startAutoPlay);
-    container.addEventListener('touchstart', stopAutoPlay, { passive: true });
-    container.addEventListener('touchend', () => {
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+      startAutoPlay();
+    });
+
+    // Touch events
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      stopAutoPlay();
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          handleMove(-1); // swipe right
+        } else {
+          handleMove(1);  // swipe left
+        }
+      }
       setTimeout(startAutoPlay, 1000);
     }, { passive: true });
+
+    // Mouse drag events for testing/desktop convenience
+    container.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      isDragging = true;
+      stopAutoPlay();
+    });
+
+    container.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const endX = e.clientX;
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          handleMove(-1);
+        } else {
+          handleMove(1);
+        }
+      }
+      startAutoPlay();
+    });
   }
 
   // Initial load
@@ -865,12 +908,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const W = flappyCanvas.width;
     const H = flappyCanvas.height;
 
-    // ── Physics (tuned for a relaxed pace) ──
-    const GRAVITY = 0.12;
-    const FLAP_VELOCITY = -3.0;
-    const MAX_FALL_SPEED = 5;
+    // ── Physics (tuned for a faster, more engaging pace) ──
+    const GRAVITY = 0.15;
+    const FLAP_VELOCITY = -3.4;
+    const MAX_FALL_SPEED = 6;
     const PIPE_GAP = 170;
-    const PIPE_SPEED = 0.9;
+    const PIPE_SPEED = 1.3;
     const PIPE_SPAWN_DISTANCE = 220;  // px between pipe spawns
     const HITBOX_PADDING = 6;         // px inset on each side
 
