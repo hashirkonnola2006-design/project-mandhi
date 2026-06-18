@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const db = require('./database');
+const MENU_ITEMS = require('./menu');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -334,6 +335,41 @@ app.delete('/api/admin/clear', requireAdminAuth, (req, res) => {
   } catch (err) {
     console.error('[DELETE /api/admin/clear]', err.message);
     res.status(500).json({ success: false, error: 'Failed to clear entries.' });
+  }
+});
+
+/**
+ * GET /api/admin/menu
+ * Returns the menu items configurations for order placements.
+ */
+app.get('/api/admin/menu', requireAdminAuth, (req, res) => {
+  res.json({ success: true, menu: MENU_ITEMS });
+});
+
+/**
+ * POST /api/admin/queue/:id/order
+ * Save order details for a specific waitlist queue entry.
+ * Body: { order: [ { itemName, quantity, size } ] }
+ */
+app.post('/api/admin/queue/:id/order', requireAdminAuth, (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const { order } = req.body;
+
+  if (!Array.isArray(order)) {
+    return res.status(400).json({ success: false, error: 'order must be an array.' });
+  }
+
+  try {
+    const entry = db.get('waitlist').find({ id }).value();
+    if (!entry) {
+      return res.status(404).json({ success: false, error: 'Queue entry not found.' });
+    }
+
+    db.get('waitlist').find({ id }).assign({ order }).write();
+    res.json({ success: true, message: `Order successfully updated for entry #${id}.`, order });
+  } catch (err) {
+    console.error('[POST /api/admin/queue/:id/order]', err.message);
+    res.status(500).json({ success: false, error: 'Failed to save order.' });
   }
 });
 

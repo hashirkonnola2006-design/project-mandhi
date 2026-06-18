@@ -545,7 +545,7 @@
     .q-table th:nth-child(3), .q-table td:nth-child(3) { width: 140px; } /* Phone */
     .q-table th:nth-child(4), .q-table td:nth-child(4) { width: 90px; } /* People */
     .q-table th:nth-child(5), .q-table td:nth-child(5) { width: 120px; } /* Waiting */
-    .q-table th:nth-child(6), .q-table td:nth-child(6) { width: 180px; } /* Actions */
+    .q-table th:nth-child(6), .q-table td:nth-child(6) { width: 260px; } /* Actions */
 
     .q-table thead tr {
       background: rgba(0, 0, 0, 0.02);
@@ -702,6 +702,281 @@
 
     .remove-btn:active {
       transform: scale(0.96);
+    }
+
+    .order-btn {
+      background: rgba(30, 41, 59, 0.08); /* Neutral dark/slate tone background */
+      border: 1px solid rgba(30, 41, 59, 0.2);
+      color: var(--text);
+      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.18s;
+    }
+
+    .order-btn:hover {
+      background: rgba(30, 41, 59, 0.18);
+    }
+
+    .order-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* =====================================================
+       MODAL OVERLAY & CARD
+    ===================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6); /* Backdrop blur/darkness */
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border-s);
+      border-radius: 22px;
+      padding: 34px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      position: relative;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: var(--text-3);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .close-modal-btn:hover {
+      background: var(--bg-3);
+      color: var(--text);
+    }
+
+    .modal-card h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    /* Menu item rows */
+    .menu-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .menu-item-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--orange);
+      cursor: pointer;
+    }
+
+    .menu-item-name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .menu-item-price-info {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      margin-top: 1px;
+    }
+
+    .menu-item-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.4;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .menu-item-row.active .menu-item-right {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Size selector dropdown */
+    .menu-item-size-select {
+      background: var(--bg-3);
+      border: 1px solid var(--border-s);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      outline: none;
+    }
+
+    /* Stepper */
+    .stepper {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-s);
+      border-radius: 6px;
+      background: var(--bg-3);
+      overflow: hidden;
+    }
+
+    .stepper-btn {
+      width: 28px;
+      height: 28px;
+      background: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .stepper-btn:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .stepper-val {
+      width: 28px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Subtotal board */
+    .order-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-2);
+      border-top: 1.5px solid var(--border-s);
+    }
+
+    .order-subtotal {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+      border-radius: var(--r-sm);
+      padding: 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s;
+    }
+
+    .modal-actions .cancel-btn {
+      background: var(--bg-3);
+      border: 1px solid var(--border-s);
+      color: var(--text-2);
+    }
+
+    .modal-actions .cancel-btn:hover {
+      background: var(--bg-4);
+      color: var(--text);
+    }
+
+    .modal-actions .btn-primary {
+      background: var(--orange);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(255, 122, 0, 0.22);
+    }
+
+    .modal-actions .btn-primary:hover {
+      background: var(--orange-dark);
+      box-shadow: 0 6px 20px rgba(255, 122, 0, 0.32);
+      transform: translateY(-1px);
+    }
+
+    .modal-actions .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Order Badge on waitlist row */
+    .order-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(30, 41, 59, 0.06);
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      color: var(--text-2);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: fit-content;
+    }
+
+    .order-badge:hover {
+      background: rgba(255, 122, 0, 0.08);
+      border-color: var(--orange-border);
+      color: var(--orange);
     }
 
     /* Empty state */
@@ -1140,11 +1415,200 @@
     </main>
   </div>
 
+  <!-- ==================== ADD ORDER MODAL ==================== -->
+  <div class="modal-overlay" id="order-modal">
+    <div class="modal-card">
+      <button class="close-modal-btn" onclick="closeOrderModal()">×</button>
+      <h2>Add Order for <span id="order-modal-guest-name">—</span></h2>
+      <p style="font-size: 0.84rem; color: var(--text-3); margin-top: -8px; margin-bottom: 20px;">
+        Select items and quantities below.
+      </p>
+      
+      <div id="order-menu-container" style="max-height: 280px; overflow-y: auto; margin-bottom: 15px; padding-right: 4px;">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+      
+      <div class="order-summary-row">
+        <span>Running Subtotal:</span>
+        <span class="order-subtotal" id="order-running-subtotal">₹0</span>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn cancel-btn" onclick="closeOrderModal()">Cancel</button>
+        <button class="btn btn-primary submit-btn" id="save-order-btn" onclick="saveOrder()">Save Order</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast"></div>
 
   <script>
     const API = window.location.origin;
+
+    let activeQueue = [];
+    let menuData = [];
+    let currentOrderId = null;
+
+    // Fetch the menu configuration from the backend
+    async function fetchMenu() {
+      try {
+        const res = await fetch(`${API}/api/admin/menu`, { credentials: 'include' });
+        const data = await res.json();
+        if (data.success) {
+          menuData = data.menu;
+        }
+      } catch (err) {
+        console.error('[fetchMenu]', err);
+      }
+    }
+
+    function openOrderModal(id, name) {
+      currentOrderId = id;
+      document.getElementById('order-modal-guest-name').textContent = name;
+
+      const entry = activeQueue.find(e => e.id === id);
+      const existingOrder = (entry && entry.order) ? entry.order : [];
+
+      const container = document.getElementById('order-menu-container');
+      container.innerHTML = menuData.map(item => {
+        const existingItem = existingOrder.find(o => o.itemName === item.name);
+        const isChecked = !!existingItem;
+        const qty = existingItem ? existingItem.quantity : 1;
+        const sizeSelected = existingItem ? existingItem.size : Object.keys(item.sizes)[0];
+
+        const sizeOptions = Object.entries(item.sizes).map(([size, price]) => {
+          return `<option value="${size}" ${size === sizeSelected ? 'selected' : ''}>${size} (₹${price})</option>`;
+        }).join('');
+
+        return `
+          <div class="menu-item-row ${isChecked ? 'active' : ''}" id="menu-item-row-${item.id}">
+            <div class="menu-item-left">
+              <input type="checkbox" class="menu-item-checkbox" id="chk-${item.id}" ${isChecked ? 'checked' : ''} onchange="toggleMenuItemActive('${item.id}')">
+              <div>
+                <div class="menu-item-name">${item.name}</div>
+                <div class="menu-item-price-info" id="price-info-${item.id}">₹${item.sizes[sizeSelected]}</div>
+              </div>
+            </div>
+            <div class="menu-item-right">
+              <select class="menu-item-size-select" id="size-${item.id}" onchange="updateItemPrice('${item.id}')">
+                ${sizeOptions}
+              </select>
+              <div class="stepper">
+                <button class="stepper-btn" onclick="adjustQty('${item.id}', -1)">-</button>
+                <div class="stepper-val" id="qty-${item.id}">${qty}</div>
+                <button class="stepper-btn" onclick="adjustQty('${item.id}', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('order-modal').classList.add('active');
+      calculateSubtotal();
+    }
+
+    function toggleMenuItemActive(itemId) {
+      const row = document.getElementById(`menu-item-row-${itemId}`);
+      const chk = document.getElementById(`chk-${itemId}`);
+      if (chk.checked) {
+        row.classList.add('active');
+      } else {
+        row.classList.remove('active');
+      }
+      calculateSubtotal();
+    }
+
+    function updateItemPrice(itemId) {
+      const select = document.getElementById(`size-${itemId}`);
+      const item = menuData.find(m => m.id === itemId);
+      if (item && select) {
+        const size = select.value;
+        const price = item.sizes[size];
+        document.getElementById(`price-info-${itemId}`).textContent = `₹${price}`;
+      }
+      calculateSubtotal();
+    }
+
+    function adjustQty(itemId, delta) {
+      const qtyEl = document.getElementById(`qty-${itemId}`);
+      if (qtyEl) {
+        let val = parseInt(qtyEl.textContent, 10);
+        val = Math.max(1, val + delta);
+        qtyEl.textContent = val;
+        calculateSubtotal();
+      }
+    }
+
+    function calculateSubtotal() {
+      let subtotal = 0;
+      menuData.forEach(item => {
+        const chk = document.getElementById(`chk-${item.id}`);
+        if (chk && chk.checked) {
+          const select = document.getElementById(`size-${item.id}`);
+          const qtyEl = document.getElementById(`qty-${item.id}`);
+          if (select && qtyEl) {
+            const size = select.value;
+            const price = item.sizes[size];
+            const qty = parseInt(qtyEl.textContent, 10);
+            subtotal += price * qty;
+          }
+        }
+      });
+      document.getElementById('order-running-subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+    }
+
+    function closeOrderModal() {
+      document.getElementById('order-modal').classList.remove('active');
+      currentOrderId = null;
+    }
+
+    async function saveOrder() {
+      const orderItems = [];
+      menuData.forEach(item => {
+        const chk = document.getElementById(`chk-${item.id}`);
+        if (chk && chk.checked) {
+          const select = document.getElementById(`size-${item.id}`);
+          const qtyEl = document.getElementById(`qty-${item.id}`);
+          if (select && qtyEl) {
+            orderItems.push({
+              itemName: item.name,
+              quantity: parseInt(qtyEl.textContent, 10),
+              size: select.value
+            });
+          }
+        }
+      });
+
+      const saveBtn = document.getElementById('save-order-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      try {
+        const res = await fetch(`${API}/api/admin/queue/${currentOrderId}/order`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ order: orderItems }),
+          credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Order saved successfully!', 'success');
+          closeOrderModal();
+          await loadQueue();
+        } else {
+          throw new Error(data.error || 'Failed to save order.');
+        }
+      } catch (err) {
+        console.error('[saveOrder]', err);
+        showToast(err.message || 'Failed to save order.', 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Order';
+      }
+    }
 
     // ======================================================
     // LOGIN
@@ -1284,6 +1748,7 @@
         if (!qData.success) throw new Error(qData.error);
 
         const queue = qData.queue;
+        activeQueue = queue;
         const stats = qData.stats;
         const seated = allData.success ? allData.summary.seated : '—';
 
@@ -1332,10 +1797,19 @@
         const cls = timerClass(secs);
         const label = formatWait(secs);
 
+        const hasOrder = entry.order && entry.order.length > 0;
+        const totalItems = hasOrder ? entry.order.reduce((acc, curr) => acc + curr.quantity, 0) : 0;
+        const orderBadgeHtml = hasOrder 
+          ? `<br><div class="order-badge" onclick="openOrderModal(${entry.id}, '${esc(entry.name)}')">📦 ${totalItems} item${totalItems > 1 ? 's' : ''}</div>` 
+          : '';
+
         return `
         <tr id="row-${entry.id}">
           <td class="td-rank" data-label="Position">${String(i + 1).padStart(2, '0')}</td>
-          <td class="td-name" data-label="Name">${esc(entry.name)}</td>
+          <td class="td-name" data-label="Name">
+            ${esc(entry.name)}
+            ${orderBadgeHtml}
+          </td>
           <td class="td-phone" data-label="Phone">${esc(entry.phone || '—')}</td>
           <td class="td-party" data-label="Party Size">
             <span class="party-chip">
@@ -1356,6 +1830,15 @@
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
                 Seat
+              </button>
+              <button class="order-btn" onclick="openOrderModal(${entry.id}, '${esc(entry.name)}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+                Order
               </button>
               <button class="remove-btn" onclick="removeEntry(${entry.id}, '${esc(entry.name)}')">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1489,7 +1972,8 @@
     // ======================================================
     // INIT — called after successful login
     // ======================================================
-    function init() {
+    async function init() {
+      await fetchMenu();
       loadQueue();
       // Auto-refresh data every 15 seconds
       autoRefreshTimer = setInterval(loadQueue, 15000);
