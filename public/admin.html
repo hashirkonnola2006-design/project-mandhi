@@ -1748,32 +1748,29 @@
       if (isFetchingQueue) return;
       isFetchingQueue = true;
       try {
-        const [qRes, allRes] = await Promise.all([
-          fetch(`${API}/api/queue`, { credentials: 'include' }),
-          fetch(`${API}/api/admin/all`, { credentials: 'include' }),
-        ]);
+        const res = await fetch(`${API}/api/admin/all`, { credentials: 'include' });
+        const data = await res.json();
 
-        const qData = await qRes.json();
-        const allData = await allRes.json();
+        if (!data.success) throw new Error(data.error);
 
-        if (!qData.success) throw new Error(qData.error);
-
-        const queue = qData.queue;
+        const allEntries = data.entries || [];
+        const queue = allEntries.filter(e => e.status === 'waiting');
         activeQueue = queue;
-        const stats = qData.stats;
-        const seated = allData.success ? allData.summary.seated : '—';
+
+        const waitingCount = data.summary ? data.summary.waiting : queue.length;
+        const seatedCount = data.summary ? data.summary.seated : '—';
 
         // Check if anything has actually changed to avoid layout shift/flicker and DOM lag
-        const currentStateHash = JSON.stringify({ queue, count: stats.count, seated });
+        const currentStateHash = JSON.stringify({ queue, count: waitingCount, seated: seatedCount });
         if (currentStateHash === lastQueueStateHash) {
           return;
         }
         lastQueueStateHash = currentStateHash;
 
         // Update stats
-        document.getElementById('stat-waiting').textContent = String(stats.count).padStart(2, '0');
-        document.getElementById('stat-seated').textContent = String(seated).padStart(2, '0');
-        document.getElementById('count-pill').textContent = stats.count;
+        document.getElementById('stat-waiting').textContent = String(waitingCount).padStart(2, '0');
+        document.getElementById('stat-seated').textContent = String(seatedCount).padStart(2, '0');
+        document.getElementById('count-pill').textContent = waitingCount;
 
         // Render rows
         renderTable(queue);
