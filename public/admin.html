@@ -49,6 +49,7 @@
     html,
     body {
       height: 100%;
+      overscroll-behavior-y: contain; /* Prevent pull-to-refresh on mobile */
     }
 
     body {
@@ -2003,6 +2004,28 @@
       // Tick live timers every second — purely client-side, no server call
       timerTickInterval = setInterval(tickTimers, 1000);
     }
+
+    // Check session on page load
+    async function checkSession() {
+      try {
+        const res = await fetch(`${API}/api/admin/all`, { credentials: 'include' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            loginScreen.style.display = 'none';
+            adminApp.classList.add('visible');
+            init();
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Session check failed:', err);
+      }
+      loginScreen.style.display = 'flex';
+    }
+
+    // Run check session on startup
+    checkSession();
   </script>
 </body>
 
