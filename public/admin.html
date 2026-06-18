@@ -1449,6 +1449,8 @@
     let activeQueue = [];
     let menuData = [];
     let currentOrderId = null;
+    let isFetchingQueue = false;
+    let lastQueueStateHash = '';
 
     // Fetch the menu configuration from the backend
     async function fetchMenu() {
@@ -1736,6 +1738,8 @@
     let timerTickInterval;
 
     async function loadQueue() {
+      if (isFetchingQueue) return;
+      isFetchingQueue = true;
       try {
         const [qRes, allRes] = await Promise.all([
           fetch(`${API}/api/queue`, { credentials: 'include' }),
@@ -1752,6 +1756,13 @@
         const stats = qData.stats;
         const seated = allData.success ? allData.summary.seated : '—';
 
+        // Check if anything has actually changed to avoid layout shift/flicker and DOM lag
+        const currentStateHash = JSON.stringify({ queue, count: stats.count, seated });
+        if (currentStateHash === lastQueueStateHash) {
+          return;
+        }
+        lastQueueStateHash = currentStateHash;
+
         // Update stats
         document.getElementById('stat-waiting').textContent = String(stats.count).padStart(2, '0');
         document.getElementById('stat-seated').textContent = String(seated).padStart(2, '0');
@@ -1766,6 +1777,7 @@
 
       } catch (err) {
         console.error(err);
+        lastQueueStateHash = ''; // Reset on error
         document.getElementById('q-tbody').innerHTML = `
         <tr><td colspan="6">
           <div class="empty-state">
@@ -1774,6 +1786,8 @@
             <div class="empty-sub">Make sure <code>node server.js</code> is running.</div>
           </div>
         </td></tr>`;
+      } finally {
+        isFetchingQueue = false;
       }
     }
 
@@ -1906,8 +1920,13 @@
       }
     });
 
-    document.getElementById('add-party').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('add-btn').click();
+    ['add-name', 'add-phone', 'add-party'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('keydown', e => {
+          if (e.key === 'Enter') document.getElementById('add-btn').click();
+        });
+      }
     });
 
     // ======================================================
