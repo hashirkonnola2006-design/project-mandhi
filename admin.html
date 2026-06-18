@@ -538,7 +538,14 @@
     .q-table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
     }
+
+    .q-table th:nth-child(1), .q-table td:nth-child(1) { width: 44px; } /* # */
+    .q-table th:nth-child(3), .q-table td:nth-child(3) { width: 140px; } /* Phone */
+    .q-table th:nth-child(4), .q-table td:nth-child(4) { width: 90px; } /* People */
+    .q-table th:nth-child(5), .q-table td:nth-child(5) { width: 120px; } /* Waiting */
+    .q-table th:nth-child(6), .q-table td:nth-child(6) { width: 180px; } /* Actions */
 
     .q-table thead tr {
       background: rgba(0, 0, 0, 0.02);
@@ -776,24 +783,202 @@
     ===================================================== */
     @media (max-width: 620px) {
 
-      .topbar,
-      .page-body {
-        padding-left: 14px;
-        padding-right: 14px;
+      .topbar {
+        padding-left: 12px;
+        padding-right: 12px;
+        height: auto;
+        min-height: 60px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
       }
 
-      .q-table th:nth-child(3),
-      .q-table td:nth-child(3) {
+      .tb-right {
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .tb-btn-text {
         display: none;
       }
 
-      /* hide phone */
-      .af-input.narrow {
-        max-width: 100%;
+      .tb-btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
       }
 
+      .page-body {
+        padding: 12px 8px;
+        gap: 14px;
+      }
+
+      .stat-strip {
+        gap: 10px;
+      }
+
+      .stat-box {
+        padding: 12px;
+      }
+
+      .s-num {
+        font-size: 1.7rem;
+      }
+
+      /* Stacking add form fields completely */
       .add-form {
+        padding: 14px;
         flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .af-field {
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .af-input {
+        width: 100%;
+        max-width: 100% !important;
+      }
+
+      .add-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        font-size: 0.92rem;
+      }
+
+      /* Card layout override for table on mobile */
+      .q-table, 
+      .q-table thead, 
+      .q-table tbody, 
+      .q-table th, 
+      .q-table td, 
+      .q-table tr {
+        display: block;
+        width: 100% !important;
+        table-layout: auto !important;
+      }
+
+      .q-table thead {
+        display: none; /* Hide header row */
+      }
+
+      .q-table tbody tr {
+        border-bottom: 1px solid var(--border-s);
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #ffffff;
+      }
+
+      .q-table td {
+        padding: 0 !important;
+        border: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100% !important;
+        font-size: 0.92rem;
+      }
+
+      /* Rank / Position styling */
+      .q-table td.td-rank {
+        font-size: 1.15rem !important;
+        font-weight: 900;
+        color: var(--orange);
+        border-bottom: 1px solid var(--border) !important;
+        padding-bottom: 6px !important;
+        margin-bottom: 4px;
+      }
+
+      .q-table td.td-rank::before {
+        content: "Queue Position";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Name rendering - bold and large */
+      .q-table td.td-name {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--text);
+        justify-content: flex-start;
+        gap: 6px;
+      }
+
+      .q-table td.td-name::before {
+        content: "Guest:";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-right: auto;
+      }
+
+      /* Phone label and styling */
+      .q-table td.td-phone::before {
+        content: "Phone";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Party size label and styling */
+      .q-table td.td-party::before {
+        content: "Party Size";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Waiting Timer label and styling */
+      .q-table td.td-timer::before {
+        content: "Time Waiting";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Actions card row */
+      .q-table td.td-actions {
+        margin-top: 8px;
+        border-top: 1px dashed var(--border-s) !important;
+        padding-top: 12px !important;
+        display: block !important;
+      }
+
+      .q-table td.td-actions::before {
+        display: none;
+      }
+
+      .action-wrap {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+      }
+
+      .action-wrap button {
+        flex: 1;
+        justify-content: center;
+        padding: 10px;
+        font-size: 0.85rem;
+        border-radius: 8px;
       }
     }
   </style>
@@ -852,9 +1037,9 @@
           <div class="live-dot"></div>
           LIVE
         </div>
-        <button class="tb-btn" id="refresh-btn">↻ Refresh</button>
-        <button class="tb-btn" onclick="logout()">Sign Out</button>
-        <button class="tb-btn" onclick="window.location.href='/'">← Website</button>
+        <button class="tb-btn" id="refresh-btn">↻ <span class="tb-btn-text">Refresh</span></button>
+        <button class="tb-btn" onclick="logout()">🚪 <span class="tb-btn-text">Sign Out</span></button>
+        <button class="tb-btn" onclick="window.location.href='/'">← <span class="tb-btn-text">Website</span></button>
       </div>
     </header>
 
@@ -1149,10 +1334,10 @@
 
         return `
         <tr id="row-${entry.id}">
-          <td class="td-rank">${String(i + 1).padStart(2, '0')}</td>
-          <td class="td-name">${esc(entry.name)}</td>
-          <td class="td-phone">${esc(entry.phone || '—')}</td>
-          <td class="td-party">
+          <td class="td-rank" data-label="Position">${String(i + 1).padStart(2, '0')}</td>
+          <td class="td-name" data-label="Name">${esc(entry.name)}</td>
+          <td class="td-phone" data-label="Phone">${esc(entry.phone || '—')}</td>
+          <td class="td-party" data-label="Party Size">
             <span class="party-chip">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
@@ -1161,10 +1346,10 @@
               ${entry.party_size}
             </span>
           </td>
-          <td class="td-timer">
+          <td class="td-timer" data-label="Waiting">
             <span class="wait-timer ${cls}" data-joined="${esc(entry.joined_at)}">⏱ ${label}</span>
           </td>
-          <td class="td-actions">
+          <td class="td-actions" data-label="Actions">
             <div class="action-wrap">
               <button class="seat-btn" onclick="seatEntry(${entry.id}, '${esc(entry.name)}')">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
