@@ -2,16 +2,8 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/:path*",
+      "source": "/((?!assets/).*)",
       "destination": "/api"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
-      "source": "/((?!api/|assets/|admin$|.*\\..*$).*)",
-      "destination": "/index.html"
     }
   ]
 }
