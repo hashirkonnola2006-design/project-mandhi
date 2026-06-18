@@ -34,6 +34,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-body);
   background-color: #121212; /* Dark ambient background for desktop */
@@ -41,14 +47,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   overflow: hidden;
 }
 
 /* App Container (Desktop Viewport Simulator) */
 .app-container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
