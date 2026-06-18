@@ -27,8 +27,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-// Serve all static files from the project root (index.html, app.js, assets/, etc.)
-app.use(express.static(path.join(__dirname)));
+// Serve all static files from the public folder (index.html, app.js, assets/, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ==================== HELPERS ====================
 
@@ -407,12 +407,12 @@ app.post('/api/admin/rewards/:id/redeem', requireAdminAuth, (req, res) => {
 
 // Serve admin.html explicitly for /admin route
 app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Serve index.html for any other unmatched GET routes (SPA fallback)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ==================== START SERVER ====================
