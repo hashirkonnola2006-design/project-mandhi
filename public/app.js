@@ -64,14 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (viewWaitlistTrigger) {
     viewWaitlistTrigger.addEventListener('click', () => switchTab('waiting-list-tab'));
   }
-  const navigateHome = document.querySelector('.navigate-home');
-  if (navigateHome) {
-    navigateHome.addEventListener('click', () => switchTab('home-tab'));
-  }
-  const navigateMenu = document.querySelector('.navigate-menu');
-  if (navigateMenu) {
-    navigateMenu.addEventListener('click', () => switchTab('menu-tab'));
-  }
+  
+  // Footer navigation links (multiple instances)
+  document.querySelectorAll('.navigate-home').forEach(btn => {
+    btn.addEventListener('click', () => switchTab('home-tab'));
+  });
+  document.querySelectorAll('.navigate-menu').forEach(btn => {
+    btn.addEventListener('click', () => switchTab('menu-tab'));
+  });
+  document.querySelectorAll('.navigate-about').forEach(btn => {
+    btn.addEventListener('click', () => switchTab('about-tab'));
+  });
+  
   const goToMenuBtn = document.querySelector('.go-to-menu-btn');
   if (goToMenuBtn) {
     goToMenuBtn.addEventListener('click', () => switchTab('menu-tab'));
